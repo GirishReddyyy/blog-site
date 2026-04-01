@@ -1,0 +1,174 @@
+###User Register
+POST http://localhost:4000/user-api/users
+Content-Type: application/json
+
+{
+    "firstName":"Anurag",
+    "lastName":"Sharma",
+    "email":"anurag.user@example.com",
+    "password":"User@12345",
+    "profileImageUrl":"http://example.com/avatars/user.png"
+
+}
+
+###User Login
+POST http://localhost:4000/common-api/authenticate
+Content-Type: application/json
+
+{
+    "email":"anurag.user@example.com",
+    "password":"User@12345"
+
+}
+
+
+###read all articles
+GET http://localhost:4000/user-api/articles/69896aacf181a08fc6987d42
+
+
+
+###add comment
+PUT http://localhost:4000/user-api/articles
+Content-Type: application/json
+
+{
+    "articleId":"6989820504c0e0d93559def6",
+    "comment":"test1 demo comment"
+}
+
+
+
+###Author Register
+POST http://localhost:4000/author-api/users
+Content-Type: application/json
+
+{
+    "firstName":"vikas",
+    "lastName":"Author",
+    "email":"vikas.author@example.com",
+    "password":"Author@12345",
+    "profileImageUrl":"http://example.com/avatars/user.png"
+
+}
+
+
+###Author Register
+POST http://localhost:4000/author-api/users
+Content-Type: application/json
+
+{
+    "firstName":"test",
+    "lastName":"Author",
+    "email":"test.author@example.com",
+    "password":"Author@12345",
+    "profileImageUrl":"http://example.com/avatars/user.png"
+
+}
+
+
+
+###Create article (Author)
+POST http://localhost:4000/author-api/articles
+Content-Type: application/json
+
+{
+    "author":"698979cc9fbd36444dfa5bec",
+    "title":"test2 article",
+    "category":"programming",
+    "content":"article-2 content"
+}
+
+
+###Read all articles
+GET http://localhost:4000/author-api/articles/698979cc9fbd36444dfa5bec
+
+
+
+###Update article(AUTHOR)
+PUT http://localhost:4000/author-api/articles
+Content-Type: application/json
+
+{
+    "author":"698979cc9fbd36444dfa5bec",
+    "articleId":"6989820504c0e0d93559def6",
+    "title":"test2 article",
+    "category":"programming",
+    "content":"article-2 content"
+}
+
+
+###Delete article (soft delete)
+PUT http://localhost:4000/author-api/articles-delete
+Content-Type: application/json
+
+{
+    "authorId":"698979cc9fbd36444dfa5bec",
+    "articleId":"6989820504c0e0d93559def6"
+}
+
+
+
+###logout
+GET http://localhost:4000/common-api/logout
+
+
+
+###Test res
+GET http://localhost:4000/test
+
+###Test res
+GET http://localhost:4000/hello
+
+
+
+###admin block user
+GET http://localhost:4000/admin-api/block/69896aacf181a08fc6987d42
+
+
+###admin unblock user
+GET http://localhost:4000/admin-api/unblock/69896aacf181a08fc6987d42
+
+
+###change password
+PUT http://localhost:4000/common-api/changepassword
+Content-Type: application/json
+
+{
+    "email":"anurag.user@example.com",
+    "currentPassword":"sharma@12345",
+    "newPassword":"User@12345"
+}
+
+###User Login after psw changed
+POST http://localhost:4000/common-api/authenticate
+Content-Type: application/json
+
+{
+    "email":"anurag.user@example.com",
+    "password":"sharma@12345"
+
+}
+
+
+### Add comment to an article
+PUT http://localhost:4000/user-api/articles
+Content-Type: application/json
+
+{
+    "user":"69896aacf181a08fc6987d42",
+    "articleId":"698975b98874b5586e86ecb8",
+    "comment":"good article"
+}
+
+
+###User creation test
+POST http://localhost:4000/user-api/users
+Content-Type: application/json
+
+{
+    "firstName":"test1",
+    "lastName":"user1",
+    "email":"testuser1@example.com",
+    "password":"password"
+
+}

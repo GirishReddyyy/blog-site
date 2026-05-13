@@ -49,9 +49,9 @@ export const navLinkActiveClass = "text-[0.8rem] text-[#0066cc] font-medium";
 //export const articleGrid        = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#e8e8ed] border border-[#e8e8ed] rounded-2xl overflow-hidden"
 export const articleGrid = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6";
 export const articleCardClass =
-  "bg-[#f5f5f7] p-7 hover:bg-[#ebebf0] transition-colors duration-200 flex flex-col gap-2.5 cursor-pointer";
-export const articleTitle = "text-base font-semibold text-[#1d1d1f] leading-snug tracking-tight";
-export const articleExcerpt = "text-sm text-[#6e6e73] leading-relaxed";
+  "bg-[#f5f5f7] rounded-2xl p-7 hover:bg-[#ebebf0] transition-colors duration-200 flex flex-col gap-2.5 cursor-pointer";
+export const articleTitle = "text-base font-semibold text-[#1d1d1f] leading-snug tracking-tight break-words";
+export const articleExcerpt = "text-sm text-[#6e6e73] leading-relaxed break-words";
 export const articleMeta = "text-xs text-[#a1a1a6]";
 export const articleBody = "text-[#6e6e73] leading-[1.85] text-[0.95rem] max-w-2xl";
 export const timestampClass = "text-xs text-[#a1a1a6] flex items-center gap-1.5";

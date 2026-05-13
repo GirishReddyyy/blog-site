@@ -168,12 +168,12 @@ function UserDashboard() {
                   <span className={tagClass}>{articleObj.category || 'Article'}</span>
 
                   {/* Title */}
-                  <h2 className="text-base font-semibold text-[#1d1d1f] leading-snug tracking-tight line-clamp-2">
+                  <h2 className="text-base font-semibold text-[#1d1d1f] leading-snug tracking-tight line-clamp-2 break-words">
                     {articleObj.title}
                   </h2>
 
                   {/* Excerpt */}
-                  <p className="text-sm text-[#6e6e73] leading-relaxed line-clamp-3 flex-1">
+                  <p className="text-sm text-[#6e6e73] leading-relaxed line-clamp-3 flex-1 break-words">
                     {articleObj.content.substring(0, 140)}…
                   </p>
 

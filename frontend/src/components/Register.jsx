@@ -39,8 +39,9 @@ function Register() {
       formData.append(key, userObj[key]);
     });
     // add profilePic to Formdata object
-    formData.append("profileImageUrl", profileImageUrl[0]);
-    //add image to formData objecte
+    if (profileImageUrl && profileImageUrl.length > 0) {
+      formData.append("profileImageUrl", profileImageUrl[0]);
+    }
     try {
       if (role === "user") {
         //make API req to user-api
@@ -49,8 +50,7 @@ function Register() {
           //navigate to login
           navigate("/login");
         }
-      }
-      if (role === "author") {
+      } else if (role === "author") {
         //make API req to author-api
         //make API req to user-api
         let resObj = await axios.post("http://localhost:4000/author-api/users", formData);
@@ -59,10 +59,19 @@ function Register() {
           //navigate to login
           navigate("/login");
         }
+      } else {
+        setError("Please select a role to register");
       }
     } catch (err) {
       // console.log("err is ", err);
-      setError(err.response?.data?.error || "Registration failed");
+      let errorMsg = err.response?.data?.message || err.response?.data?.error || "Registration failed";
+      if (err.response?.data?.errors) {
+        const firstError = Object.values(err.response.data.errors)[0];
+        if (firstError?.message) {
+            errorMsg = firstError.message;
+        }
+      }
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }

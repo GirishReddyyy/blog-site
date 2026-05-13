@@ -30,13 +30,11 @@ function ArticleById() {
   const user = useAuth((state) => state.currentUser);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-  const [article, setArticle] = useState(location.state || null);
+  const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (article) return;
-
     const getArticle = async () => {
       setLoading(true);
 
@@ -52,7 +50,7 @@ function ArticleById() {
     };
 
     getArticle();
-  }, [id, article]);
+  }, [id]);
 
   const formatDate = (date) => {
     return new Date(date).toLocaleString("en-IN", {
@@ -161,14 +159,25 @@ function ArticleById() {
 
       {/* comment */}
       {article.comments && article.comments.length > 0 && (
-        <div className="mt-8">
-          <h3 className="text-lg font-bold mb-4">Comments ({article.comments.length})</h3>
-          {article.comments.map((comment, idx)=>(
-            <div key={idx} className="border-l-4 border-blue-400 pl-4 mb-4">
-                <p className="font-semibold text-sm">{comment.user?.email || "Anonymous"}</p>
-                <p className="text-gray-700">{comment.comment}</p>
-            </div>
-          ))}
+        <div className="mt-12 pt-8 border-t border-[#e8e8ed]">
+          <h3 className="text-xl font-bold mb-6 text-[#1d1d1f]">Comments ({article.comments.length})</h3>
+          <div className="flex flex-col gap-6">
+            {article.comments.map((comment, idx)=>(
+              <div key={idx} className="flex gap-4">
+                {comment.user?.profileImageUrl ? (
+                  <img src={comment.user.profileImageUrl} alt="user" className="w-10 h-10 rounded-full object-cover shrink-0 border border-[#e8e8ed]" />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-[#f5f5f7] flex items-center justify-center text-[#6e6e73] font-bold shrink-0 border border-[#e8e8ed]">
+                    {(comment.user?.firstName?.[0] || comment.user?.email?.[0] || "?").toUpperCase()}
+                  </div>
+                )}
+                <div className="flex flex-col flex-1 bg-[#f5f5f7] rounded-2xl rounded-tl-sm p-4">
+                  <p className="font-semibold text-sm text-[#1d1d1f]">{comment.user?.firstName || "User"} <span className="text-xs font-normal text-[#a1a1a6] ml-1">{comment.user?.email}</span></p>
+                  <p className="text-[#6e6e73] mt-1 text-sm leading-relaxed">{comment.comment}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

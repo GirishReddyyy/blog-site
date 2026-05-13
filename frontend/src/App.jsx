@@ -85,13 +85,7 @@ function App() {
               <AdminDashboard />
             </ProtectedRoute>,
         },
-        {
-          path: "articles",
-          element:
-            <ProtectedRoute allowedRoles={["AUTHOR"]}>
-              <WriteArticle />
-            </ProtectedRoute>,
-        },
+
         {
           path: "article/:id",
           element: <ArticleByID />,

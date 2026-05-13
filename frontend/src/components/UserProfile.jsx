@@ -12,6 +12,9 @@ import {
   loadingClass,
   errorClass,
   timestampClass,
+  articleExcerpt,
+  articleMeta,
+  tagClass,
 } from "../styles/common.js";
 
 function UserProfile() {
@@ -101,22 +104,18 @@ function UserProfile() {
 
       <div className={articleGrid}>
         {articles?.map((articleObj) => (
-          <div className={articleCardClass} key={articleObj._id}>
-            <div className="flex flex-col h-full">
-              {/* Top Content */}
-              <div>
-                <p className={articleTitle}>{articleObj.title}</p>
-
-                <p>{articleObj.content.slice(0, 20)}...</p>
-
-                <p className={timestampClass}>{formatDateIST(articleObj.createdAt)}</p>
-              </div>
-
-              {/* Button at bottom */}
-              <button className={`${ghostBtn} mt-auto pt-4`} onClick={() => navigateToArticleByID(articleObj)}>
-                Read Article →
-              </button>
+          <div className={`${articleCardClass} relative`} key={articleObj._id}>
+            <div className="flex flex-col gap-2">
+              <span className={tagClass}>{articleObj.category || 'Article'}</span>
+              <p className={articleTitle}>{articleObj.title}</p>
+              <p className={`${articleExcerpt} line-clamp-3`}>{articleObj.content}</p>
+              <p className={timestampClass}>{formatDateIST(articleObj.createdAt)}</p>
             </div>
+
+            {/* Button at bottom */}
+            <button className={`${ghostBtn} mt-auto pt-4 text-left`} onClick={() => navigateToArticleByID(articleObj)}>
+              Read Article →
+            </button>
           </div>
         ))}
       </div>

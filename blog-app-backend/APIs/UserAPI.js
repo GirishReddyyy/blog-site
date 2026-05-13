@@ -77,7 +77,7 @@ userRoute.get('/article/:articleId', verifyToken("USER", "AUTHOR"), async (req, 
     try {
         let articleId = req.params.articleId
         //fetch article and populate author info
-        let article = await ArticleModel.findById(articleId).populate("author", "firstName email profileImageUrl").populate("comments.user", "email firstName")
+        let article = await ArticleModel.findById(articleId).populate("author", "firstName email profileImageUrl").populate("comments.user", "email firstName profileImageUrl")
         
         if (!article) {
             return res.status(404).json({ message: "Article not found" })
@@ -112,7 +112,7 @@ userRoute.put('/articles', verifyToken("USER"), async (req, res, next) => {
         //populate user data for response
         let articleWithComment = await ArticleModel.findById(articleId)
             .populate("author", "firstName email profileImageUrl")
-            .populate("comments.user", "email firstName")
+            .populate("comments.user", "email firstName profileImageUrl")
 
         //send response with updated article
         res.status(200).json({ message: "Comment added successfully", payload: articleWithComment })

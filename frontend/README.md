@@ -1,16 +1,43 @@
-# React + Vite
+# Blog Application - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend user interface for the full-stack MERN blog application. It provides a responsive and dynamic interface for Admins, Authors, and Users to interact with the platform.
 
-Currently, two official plugins are available:
+## 🛠️ Technologies Used
+- **React 19**: A JavaScript library for building user interfaces.
+- **Vite**: A fast frontend build tool.
+- **React Router 7**: For declarative routing and navigation.
+- **Tailwind CSS v4**: A utility-first CSS framework for rapid and responsive UI development.
+- **Zustand**: A small, fast, and scalable state-management solution.
+- **React Hook Form**: Performant, flexible, and extensible forms with easy-to-use validation.
+- **React Hot Toast**: For elegant and customizable notifications.
+- **Axios**: Promise-based HTTP client for the browser.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📁 Directory Structure
+```text
+frontend/
+├── public/              # Static assets that are not processed by Vite
+├── src/                 
+│   ├── assets/          # Project assets like images and icons
+│   ├── components/      # React components (e.g., UserDashboard, WriteArticle, Login)
+│   ├── store/           # Zustand state slices (e.g., userStore)
+│   ├── styles/          # Global styles and Tailwind imports
+│   ├── App.jsx          # Main application component and routing configuration
+│   └── main.jsx         # Application entry point
+├── index.html           # Main HTML template
+└── vite.config.js       # Vite build and development configuration
+```
 
-## React Compiler
+## 🚀 Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Install Dependencies
+Make sure you are in the `frontend` directory, then run:
+```bash
+npm install
+```
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 2. Start the Development Server
+```bash
+npm run dev
+```
+The frontend application will start and is typically accessible at `http://localhost:5173`. 
+Ensure that the backend server is also running concurrently so the frontend can successfully communicate with the APIs.

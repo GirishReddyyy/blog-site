@@ -2,6 +2,7 @@ import { useAuth } from "../store/authStore";
 import { useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import API_BASE_URL from "../config/api";
 import { useEffect, useState } from "react";
 
 import {
@@ -32,7 +33,7 @@ function UserProfile() {
         
       setLoading(true);
       try {
-        const res = await axios.get(`http://localhost:4000/user-api/articles/${currentUser?._id}`, { withCredentials: true });
+        const res = await axios.get(`${API_BASE_URL}/user-api/articles/${currentUser?._id}`, { withCredentials: true });
         setArticles(res.data.payload || []);
       } catch (err) {
         setError(err.response?.data?.error || "Something went wrong");

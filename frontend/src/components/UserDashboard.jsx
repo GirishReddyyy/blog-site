@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { toast } from 'react-hot-toast'
 import { useState, useEffect } from "react";
 import axios from 'axios'
+import API_BASE_URL from '../config/api'
 import { errorClass, tagClass } from "../styles/common";
 
 function UserDashboard() {
@@ -25,7 +26,7 @@ function UserDashboard() {
       if (!currentUser?._id) return
       setLoading(true);
       try {
-        let res = await axios.get(`http://localhost:4000/user-api/articles/${currentUser._id}`, { withCredentials: true })
+        let res = await axios.get(`${API_BASE_URL}/user-api/articles/${currentUser._id}`, { withCredentials: true })
         setArticles(res.data.payload)
       } catch (err) {
         setError(err.response?.data?.message || err.message)

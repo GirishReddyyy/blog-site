@@ -13,8 +13,8 @@ commonRouter.post('/login', async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax"
+            secure: true,
+            sameSite: "none"
         });
 
         res.status(200).json({ message: "logged in successfully!", payload: user });
@@ -29,8 +29,8 @@ commonRouter.get('/logout', async (req, res) => {
     //clear the cookie named 'token'
     res.clearCookie('token', {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax"
+        secure: true,
+        sameSite: "none"
     })
     res.status(200).json({ message: "logged out successfully" })
 })

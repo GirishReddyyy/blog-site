@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import API_BASE_URL from '../config/api'
 import {
   pageBackground, pageWrapper, section,
   headingClass, subHeadingClass, bodyText, mutedText,
@@ -145,7 +146,7 @@ function AdminDashboard() {
     setLoadingUsers(true)
     setError(null)
     try {
-      const res = await axios.get(`http://localhost:4000/admin-api/users/${adminId}`, { withCredentials: true })
+      const res = await axios.get(`${API_BASE_URL}/admin-api/users/${adminId}`, { withCredentials: true })
       setUsers(res.data.payload || [])
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to fetch users')
@@ -159,7 +160,7 @@ function AdminDashboard() {
     setLoadingArticles(true)
     setError(null)
     try {
-      const res = await axios.get(`http://localhost:4000/admin-api/articles/${adminId}`, { withCredentials: true })
+      const res = await axios.get(`${API_BASE_URL}/admin-api/articles/${adminId}`, { withCredentials: true })
       setArticles(res.data.payload || [])
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to fetch articles')
@@ -179,7 +180,7 @@ function AdminDashboard() {
   const handleBlock = async (uid) => {
     setUserActionLoading(uid)
     try {
-      await axios.put(`http://localhost:4000/admin-api/block/${uid}/adminId/${adminId}`, {}, { withCredentials: true })
+      await axios.put(`${API_BASE_URL}/admin-api/block/${uid}/adminId/${adminId}`, {}, { withCredentials: true })
       setUsers(prev => prev.map(u => u._id === uid ? { ...u, isActive: false } : u))
       showToast('User blocked successfully')
     } catch (err) {
@@ -193,7 +194,7 @@ function AdminDashboard() {
   const handleUnblock = async (uid) => {
     setUserActionLoading(uid)
     try {
-      await axios.put(`http://localhost:4000/admin-api/unblock/${uid}/adminId/${adminId}`, {}, { withCredentials: true })
+      await axios.put(`${API_BASE_URL}/admin-api/unblock/${uid}/adminId/${adminId}`, {}, { withCredentials: true })
       setUsers(prev => prev.map(u => u._id === uid ? { ...u, isActive: true } : u))
       showToast('User unblocked successfully')
     } catch (err) {
@@ -209,7 +210,7 @@ function AdminDashboard() {
     const endpoint = isActive ? 'deactivate' : 'activate'
     try {
       await axios.put(
-        `http://localhost:4000/admin-api/${endpoint}/${articleId}/adminId/${adminId}`,
+        `${API_BASE_URL}/admin-api/${endpoint}/${articleId}/adminId/${adminId}`,
         {},
         { withCredentials: true }
       )

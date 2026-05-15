@@ -1,6 +1,7 @@
 import { useParams, useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API_BASE_URL from "../config/api";
 import { useAuth } from "../store/authStore";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
@@ -42,7 +43,7 @@ function ArticleById() {
       setLoading(true);
 
       try {
-        const res = await axios.get(`http://localhost:4000/user-api/article/${id}`, { withCredentials: true });
+        const res = await axios.get(`${API_BASE_URL}/user-api/article/${id}`, { withCredentials: true });
 
         setArticle(res.data.payload);
       } catch (err) {
@@ -72,7 +73,7 @@ function ArticleById() {
 
     try {
       const res = await axios.patch(
-        `http://localhost:4000/author-api/articles-delete`,
+        `${API_BASE_URL}/author-api/articles-delete`,
         { articleId: id, isArticleActive: newStatus },
         { withCredentials: true },
       );
@@ -102,7 +103,7 @@ function ArticleById() {
   const addComment = async (commentData) => {
     try {
       const res = await axios.put(
-        "http://localhost:4000/user-api/articles",
+        `${API_BASE_URL}/user-api/articles`,
         { articleId: id, comment: commentData.comment },
         { withCredentials: true }
       );

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import axios from "axios";
+import API_BASE_URL from "../config/api";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router";
 
@@ -35,7 +36,7 @@ function WriteArticle() {
     articleObj.author=currentUser._id;
     try {
       await axios.post(
-        "http://localhost:4000/author-api/articles",
+        `${API_BASE_URL}/author-api/articles`,
         articleObj,
         { withCredentials: true }
       );

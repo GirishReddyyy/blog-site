@@ -34,7 +34,8 @@ const UserSchema = new Schema({
 {
     timestamps:true,
     strict:"throw",
-    versionKey:false
+    versionKey:false,
+    collection:"blog-users"
 })
 
 

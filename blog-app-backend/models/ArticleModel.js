@@ -40,7 +40,8 @@ const articleSchema= new Schema({
 },{
     timestamps:true,
     strict:"throw",
-    versionKey:false
+    versionKey:false,
+    collection:"blog-articles"
 })
 
 

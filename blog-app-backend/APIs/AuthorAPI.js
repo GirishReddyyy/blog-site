@@ -74,8 +74,8 @@ authorRoute.get('/articles/:authorID', verifyToken("AUTHOR"), checkAuthor, async
     //read articles by this author
     //let articles=await ArticleModel.find({author:authorId})
 
-    //read articles by this author which are active
-    let articles = await ArticleModel.find({ author: authorId, isArticleActive: true }).populate("author", "firstName email")
+    //read articles by this author (both active and inactive)
+    let articles = await ArticleModel.find({ author: authorId }).populate("author", "firstName lastName email profileImageUrl")
 
     //send res
     res.status(200).json({ message: "articles of the author", payload: articles })

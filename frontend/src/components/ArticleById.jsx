@@ -20,6 +20,8 @@ import {
   errorClass,
   inputClass,
   submitBtn,
+  articleStatusActive,
+  articleStatusDeleted,
 } from "../styles/common.js";
 
 function ArticleById() {
@@ -35,6 +37,7 @@ function ArticleById() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getArticle = async () => {
       setLoading(true);
 
@@ -117,14 +120,27 @@ function ArticleById() {
 
   return (
     <div className={articlePageWrapper}>
+      {/* Back Button */}
+      <button 
+        onClick={() => navigate(-1)} 
+        className="mb-6 flex items-center gap-1 text-sm font-medium text-[#6e6e73] hover:text-[#1d1d1f] transition-colors cursor-pointer"
+      >
+        ← Back
+      </button>
+
       {/* Header */}
-      <div className={articleHeader}>
+      <div className={`${articleHeader} relative`}>
+        {user?.role === "AUTHOR" && (
+          <span className={article.isArticleActive ? articleStatusActive : articleStatusDeleted} style={{ top: "0", right: "0" }}>
+            {article.isArticleActive ? "ACTIVE" : "INACTIVE"}
+          </span>
+        )}
         <span className={articleCategory}>{article.category}</span>
 
         <h1 className={`${articleMainTitle} uppercase`}>{article.title}</h1>
 
         <div className={articleAuthorRow}>
-          <div className={authorInfo}>✍️ {article.author?.firstName || "Author"}</div>
+          <div className={authorInfo}>✍️ {article.author?.firstName} {article.author?.lastName}</div>
 
           <div>{formatDate(article.createdAt)}</div>
         </div>

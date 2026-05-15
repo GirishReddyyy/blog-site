@@ -22,8 +22,8 @@ function Register() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  //const []=useState()
 
   const onUserRegister = async (newUser) => {
     setLoading(true);
@@ -149,43 +149,67 @@ function Register() {
           {/* Password */}
           <div className={formGroup}>
             <label className={labelClass}>Password</label>
-            <input type="password" {...register("password")} placeholder="Min. 8 characters" className={inputClass} />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                {...register("password")}
+                placeholder="Min. 8 characters"
+                className={inputClass}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#6e6e73] hover:text-[#1d1d1f] transition-colors"
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
           </div>
 
           {/* Profile Image URL */}
           <div className={formGroup}>
-            <label className={labelClass}>Profile Image URL</label>
-            <input
-              type="file"
-              accept="image/png, image/jpeg"
-              {...register("profileImageUrl")}
-              onChange={(e) => {
-                //get image file
-                const file = e.target.files[0];
-                // validation for image format
-                if (file) {
-                  if (!["image/jpeg", "image/png"].includes(file.type)) {
-                    setError("Only JPG or PNG allowed");
-                    return;
-                  }
-                  //validation for file size
-                  if (file.size > 2 * 1024 * 1024) {
-                    setError("File size must be less than 2MB");
-                    return;
-                  }
-                  //Converts file → temporary browser URL(create preview URL)
-                  const previewUrl = URL.createObjectURL(file);
-                  setPreview(previewUrl);
-                  setError(null);
-                }
-              }}
-            />
-
-            {preview && (
-              <div className="mt-3 flex justify-center">
-                <img src={preview} alt="Preview" className="w-24 h-24 object-cover rounded-full border" />
+            <label className={labelClass}>Profile Image</label>
+            <div className="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-[#e8e8ed] border-dashed rounded-xl bg-[#f5f5f7] hover:bg-[#ebebf0] transition-colors relative">
+              <div className="space-y-2 text-center flex flex-col items-center">
+                {preview ? (
+                  <img src={preview} alt="Preview" className="w-20 h-20 object-cover rounded-full shadow-sm" />
+                ) : (
+                  <svg className="mx-auto h-10 w-10 text-[#a1a1a6]" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
+                <div className="flex text-sm text-[#6e6e73] justify-center mt-2">
+                  <label htmlFor="file-upload" className="relative cursor-pointer rounded-md font-medium text-[#0066cc] hover:text-[#005bb5] focus-within:outline-none">
+                    <span>{preview ? "Change image" : "Upload a file"}</span>
+                    <input
+                      id="file-upload"
+                      type="file"
+                      className="sr-only"
+                      accept="image/png, image/jpeg"
+                      {...register("profileImageUrl")}
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file) {
+                          if (!["image/jpeg", "image/png"].includes(file.type)) {
+                            setError("Only JPG or PNG allowed");
+                            return;
+                          }
+                          if (file.size > 2 * 1024 * 1024) {
+                            setError("File size must be less than 2MB");
+                            return;
+                          }
+                          const previewUrl = URL.createObjectURL(file);
+                          setPreview(previewUrl);
+                          setError(null);
+                        }
+                      }}
+                    />
+                  </label>
+                  {!preview && <p className="pl-1">or drag and drop</p>}
+                </div>
+                {!preview && <p className="text-xs text-[#a1a1a6]">PNG, JPG up to 2MB</p>}
               </div>
-            )}
+            </div>
           </div>
 
           {/* Submit */}

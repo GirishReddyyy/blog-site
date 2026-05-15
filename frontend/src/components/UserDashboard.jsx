@@ -80,17 +80,18 @@ function UserDashboard() {
             )}
             <div className="min-w-0">
               <p className="text-sm font-semibold text-[#1d1d1f] truncate">{currentUser?.firstName} {currentUser?.lastName}</p>
-              <p className="text-[11px] text-[#a1a1a6]">Reader</p>
+              <p className="text-xs text-[#6e6e73] truncate">{currentUser?.email}</p>
+              <p className="text-[11px] text-[#a1a1a6] mt-1">Reader</p>
             </div>
           </div>
 
           {/* Nav */}
           <nav className="flex flex-col gap-1 flex-1">
-            <p className="text-[10px] font-semibold text-[#a1a1a6] uppercase tracking-widest mb-2">Explore</p>
+            <p className="text-[10px] font-semibold text-[#a1a1a6] uppercase tracking-widest mb-2">Content</p>
             <button
               className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium bg-[#1d1d1f] text-white"
             >
-              <span>📰</span> My Feed
+              <span>📰</span> Explore
             </button>
           </nav>
 

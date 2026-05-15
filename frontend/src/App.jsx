@@ -56,20 +56,9 @@ function App() {
             <ProtectedRoute allowedRoles={["AUTHOR"]}>
               <AuthorDashboard />
             </ProtectedRoute>,
-        },
-        {
-          path: "author-profile",
-          element:
-            <ProtectedRoute allowedRoles={["AUTHOR"]}>
-              <AuthorProfile />
-            </ProtectedRoute>,
           children: [
             {
               index: true,
-              element: <AuthorArticles />,
-            },
-            {
-              path: "articles",
               element: <AuthorArticles />,
             },
             {

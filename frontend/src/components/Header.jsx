@@ -1,7 +1,25 @@
-import { NavLink } from "react-router"
+import { NavLink, useNavigate } from "react-router"
 import { navLinkClass, navLinkActiveClass } from "../styles/common"
+import { useAuth } from "../store/authStore"
+import { toast } from "react-hot-toast"
 
 function Header() {
+  const currentUser = useAuth((state) => state.currentUser)
+  const logout = useAuth((state) => state.logout)
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    await logout()
+    toast.success("Logged Out Successfully!")
+    navigate("/login")
+  }
+
+  const getDashboardPath = () => {
+    if (currentUser?.role === "USER") return "/user-dashboard"
+    if (currentUser?.role === "AUTHOR") return "/author-dashboard"
+    if (currentUser?.role === "ADMIN") return "/admin-dashboard"
+    return "/"
+  }
 
   const navStyle = ({ isActive }) =>
     `${navLinkClass} ${isActive ? navLinkActiveClass : ""}`
@@ -23,17 +41,35 @@ function Header() {
           </NavLink>
         </li>
 
-        <li>
-          <NavLink to="/register" className={navStyle}>
-            Register
-          </NavLink>
-        </li>
+        {!currentUser ? (
+          <>
+            <li>
+              <NavLink to="/register" className={navStyle}>
+                Register
+              </NavLink>
+            </li>
 
-        <li>
-          <NavLink to="/login" className={navStyle}>
-            Login
-          </NavLink>
-        </li>
+            <li>
+              <NavLink to="/login" className={navStyle}>
+                Login
+              </NavLink>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <NavLink to={getDashboardPath()} className={navStyle}>
+                Dashboard
+              </NavLink>
+            </li>
+
+            <li>
+              <button onClick={handleLogout} className={`${navLinkClass} cursor-pointer`}>
+                Logout
+              </button>
+            </li>
+          </>
+        )}
 
       </ul>
 

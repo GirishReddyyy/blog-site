@@ -9,6 +9,11 @@ import { commonRouter } from './APIs/commonAPI.js'
 import cors from 'cors'
 import { UserTypeModel } from './models/UserModel.js'
 import { register } from './services/authService.js'
+import dns from 'node:dns'
+
+// Force Node.js to use Google's public DNS servers (fixes MongoDB Atlas SRV lookup failures)
+dns.setServers(['8.8.8.8', '8.8.4.4'])
+dns.setDefaultResultOrder('ipv4first')
 
 config() //process.env 
 

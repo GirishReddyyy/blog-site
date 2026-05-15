@@ -59,7 +59,7 @@ userRoute.get('/articles/:userId', verifyToken("USER"), async (req, res, next) =
         }
 
         //fetch articles
-        let articles = await ArticleModel.find({ isArticleActive: true })
+        let articles = await ArticleModel.find({ isArticleActive: true }).populate("author", "firstName lastName email profileImageUrl")
         console.log("Articles found:", articles.length)
         if (!articles || articles.length === 0) {
             return res.status(200).json({ message: "No articles found", payload: [] })
@@ -77,9 +77,14 @@ userRoute.get('/article/:articleId', verifyToken("USER", "AUTHOR"), async (req, 
     try {
         let articleId = req.params.articleId
         //fetch article and populate author info
-        let article = await ArticleModel.findById(articleId).populate("author", "firstName email profileImageUrl").populate("comments.user", "email firstName profileImageUrl")
+        let article = await ArticleModel.findById(articleId).populate("author", "firstName lastName email profileImageUrl").populate("comments.user", "email firstName lastName profileImageUrl")
         
         if (!article) {
+            return res.status(404).json({ message: "Article not found" })
+        }
+        
+        // Prevent normal users from viewing soft-deleted articles
+        if (req.user.role === "USER" && !article.isArticleActive) {
             return res.status(404).json({ message: "Article not found" })
         }
         
@@ -111,8 +116,8 @@ userRoute.put('/articles', verifyToken("USER"), async (req, res, next) => {
 
         //populate user data for response
         let articleWithComment = await ArticleModel.findById(articleId)
-            .populate("author", "firstName email profileImageUrl")
-            .populate("comments.user", "email firstName profileImageUrl")
+            .populate("author", "firstName lastName email profileImageUrl")
+            .populate("comments.user", "email firstName lastName profileImageUrl")
 
         //send response with updated article
         res.status(200).json({ message: "Comment added successfully", payload: articleWithComment })

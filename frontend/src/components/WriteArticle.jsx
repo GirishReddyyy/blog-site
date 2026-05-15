@@ -44,7 +44,7 @@ function WriteArticle() {
 
       reset();
 
-      navigate("/author-profile/articles");
+      navigate("/author-dashboard");
 
     } catch (err) {
       toast.error(err.response?.data?.error || "Failed to publish article");
@@ -54,86 +54,88 @@ function WriteArticle() {
   };
 
   return (
-    <div className={formCard}>
-      <h2 className={formTitle}>Write New Article</h2>
+    <div className="flex flex-col flex-1 items-center justify-center min-h-[80vh]">
+      <div className={`${formCard} w-full max-w-3xl`}>
+        <h2 className={formTitle}>Write New Article</h2>
 
-      <form onSubmit={handleSubmit(submitArticle)}>
+        <form onSubmit={handleSubmit(submitArticle)}>
 
-        {/* Title */}
-        <div className={formGroup}>
-          <label className={labelClass}>Title</label>
+          {/* Title */}
+          <div className={formGroup}>
+            <label className={labelClass}>Title</label>
 
-          <input
-            type="text"
-            className={inputClass}
-            placeholder="Enter article title"
-            {...register("title", {
-              required: "Title is required",
-              minLength: {
-                value: 5,
-                message: "Title must be at least 5 characters",
-              },
-            })}
-          />
+            <input
+              type="text"
+              className={inputClass}
+              placeholder="Enter article title"
+              {...register("title", {
+                required: "Title is required",
+                minLength: {
+                  value: 5,
+                  message: "Title must be at least 5 characters",
+                },
+              })}
+            />
 
-          {errors.title && (
-            <p className={errorClass}>{errors.title.message}</p>
+            {errors.title && (
+              <p className={errorClass}>{errors.title.message}</p>
+            )}
+          </div>
+
+          {/* Category */}
+          <div className={formGroup}>
+            <label className={labelClass}>Category</label>
+
+            <select
+              className={inputClass}
+              {...register("category", {
+                required: "Category is required",
+              })}
+            >
+              <option value="">Select category</option>
+              <option value="technology">Technology</option>
+              <option value="programming">Programming</option>
+              <option value="ai">AI</option>
+              <option value="web-development">Web Development</option>
+            </select>
+
+            {errors.category && (
+              <p className={errorClass}>{errors.category.message}</p>
+            )}
+          </div>
+
+          {/* Content */}
+          <div className={formGroup}>
+            <label className={labelClass}>Content</label>
+
+            <textarea
+              rows="12"
+              className={inputClass}
+              placeholder="Write your article content..."
+              {...register("content", {
+                required: "Content is required",
+                minLength: {
+                  value: 50,
+                  message: "Content must be at least 50 characters",
+                },
+              })}
+            />
+
+            {errors.content && (
+              <p className={errorClass}>{errors.content.message}</p>
+            )}
+          </div>
+
+          {/* Submit */}
+          <button className={submitBtn} type="submit" disabled={loading}>
+            {loading ? "Publishing..." : "Publish Article"}
+          </button>
+
+          {loading && (
+            <p className={loadingClass}>Publishing article...</p>
           )}
-        </div>
-
-        {/* Category */}
-        <div className={formGroup}>
-          <label className={labelClass}>Category</label>
-
-          <select
-            className={inputClass}
-            {...register("category", {
-              required: "Category is required",
-            })}
-          >
-            <option value="">Select category</option>
-            <option value="technology">Technology</option>
-            <option value="programming">Programming</option>
-            <option value="ai">AI</option>
-            <option value="web-development">Web Development</option>
-          </select>
-
-          {errors.category && (
-            <p className={errorClass}>{errors.category.message}</p>
-          )}
-        </div>
-
-        {/* Content */}
-        <div className={formGroup}>
-          <label className={labelClass}>Content</label>
-
-          <textarea
-            rows="8"
-            className={inputClass}
-            placeholder="Write your article content..."
-            {...register("content", {
-              required: "Content is required",
-              minLength: {
-                value: 50,
-                message: "Content must be at least 50 characters",
-              },
-            })}
-          />
-
-          {errors.content && (
-            <p className={errorClass}>{errors.content.message}</p>
-          )}
-        </div>
-
-        {/* Submit */}
-        <button className={submitBtn} type="submit" disabled={loading}>
-          {loading ? "Publishing..." : "Publish Article"}
-        </button>
-
-        {loading && (
-          <p className={loadingClass}>Publishing article...</p>
-        )}
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

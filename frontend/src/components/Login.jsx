@@ -1,9 +1,19 @@
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../store/authStore'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import { useEffect, useState } from 'react'
+import { useNavigate, NavLink } from 'react-router'
 import toast from 'react-hot-toast'
-
+import {
+  pageBackground,
+  formCard,
+  formTitle,
+  formGroup,
+  labelClass,
+  inputClass,
+  submitBtn,
+  errorClass,
+  mutedText,
+} from '../styles/common'
 
 function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm()
@@ -13,12 +23,10 @@ function Login() {
     const loading = useAuth((state) => state.loading)
     const error = useAuth((state) => state.error)
     const navigate = useNavigate()
-
-    // console.log("Is Authenticated :", isAuthenticated)   
-    // console.log("Current user", currentCredObj)
+    
+    const [showPassword, setShowPassword] = useState(false)
 
     const onUserLogin = async (userCredObj) => {
-        console.log("Logging in with:", userCredObj)
         await login(userCredObj)
     }
 
@@ -26,11 +34,11 @@ function Login() {
         if (isAuthenticated) {
             toast.success("Logged in successfully")
             if (currentUser?.role === 'USER') {
-                navigate("/user-profile")
+                navigate("/user-dashboard")
                 return
             }
             if (currentUser?.role === 'AUTHOR') {
-                navigate("/author-profile")
+                navigate("/author-dashboard")
                 return
             }
             if (currentUser?.role === 'ADMIN') {
@@ -43,37 +51,59 @@ function Login() {
 
 
     return (
-        <div>
-            <div className='min-h-screen flex flex-col items-center justify-center'>
-                <h1 className='text-2xl text-center font-bold'>Login</h1>
+        <div className={`${pageBackground} flex items-center justify-center py-16 px-4`}>
+            <div className={formCard}>
+                <h2 className={formTitle}>Welcome Back</h2>
                 
-                {/* Display error message if any */}
-                {error && <p className='text-red-500 text-center mb-4'>{error}</p>}
+                {error && <p className={`${errorClass} text-center mb-4`}>{error}</p>}
                 
-                <form onSubmit={handleSubmit(onUserLogin)} className='p-10 rounded-lg max-w-lg shadow-lg'>
+                <form onSubmit={handleSubmit(onUserLogin)}>
                     {/* email */}
-                    <input type="email" placeholder='enter your email'
-                        {...register("email", { required: "email is required(so that we can spam you! jk)" })}
-                        className='border rounded w-full mt-5 p-2'
-                    />
-                    {
-                        errors.email && (<p className='text-red-500'>{errors.email.message}</p>)
-                    }
-                    {/* password */}
-                    <input type="password" placeholder='enter your password'
-                        {...register("password", { required: "password is required", minLength: { value: 6, message: "Minimum 6 characters" } })}
-                        className='border rounded w-full mt-5 p-2'
-                    />
-                    {
-                        errors.password && (<p className='text-red-500'>{errors.password.message}</p>)
-                    }
-                    {/* submit button */}
-                    <div className='flex justify-center'>
-                        <button disabled={loading} className='bg-blue-400 text-white rounded mt-5 px-7 py-2 disabled:opacity-50'>
-                            {loading ? 'Logging in...' : 'Login'}
-                        </button>
+                    <div className={formGroup}>
+                        <label className={labelClass}>Email</label>
+                        <input 
+                            type="email" 
+                            placeholder='you@example.com'
+                            {...register("email", { required: "Email is required" })}
+                            className={inputClass}
+                        />
+                        {errors.email && <p className={errorClass}>{errors.email.message}</p>}
                     </div>
+
+                    {/* password */}
+                    <div className={formGroup}>
+                        <label className={labelClass}>Password</label>
+                        <div className="relative">
+                            <input 
+                                type={showPassword ? "text" : "password"} 
+                                placeholder='Enter your password'
+                                {...register("password", { required: "Password is required", minLength: { value: 6, message: "Minimum 6 characters" } })}
+                                className={inputClass}
+                            />
+                            <button 
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#6e6e73] hover:text-[#1d1d1f] transition-colors"
+                            >
+                                {showPassword ? "Hide" : "Show"}
+                            </button>
+                        </div>
+                        {errors.password && <p className={errorClass}>{errors.password.message}</p>}
+                    </div>
+
+                    {/* submit button */}
+                    <button type="submit" disabled={loading} className={submitBtn}>
+                        {loading ? 'Logging in...' : 'Sign In'}
+                    </button>
                 </form>
+
+                {/* Footer note */}
+                <p className={`${mutedText} text-center mt-6`}>
+                    Not registered yet?{" "}
+                    <NavLink to="/register" className="text-violet-600 hover:text-violet-500 font-medium">
+                        Create an account
+                    </NavLink>
+                </p>
             </div>
         </div>
     )

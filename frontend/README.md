@@ -74,4 +74,4 @@ The frontend application will start and is typically accessible at `http://local
 Ensure that the backend server is also running concurrently so the frontend can successfully communicate with the APIs.
 
 ## 🔗 Live Application Link (Vercel)
-- **Frontend App:** [Insert Vercel Link Here]
+- **Frontend App:** https://blog-site-ten-pi.vercel.app/

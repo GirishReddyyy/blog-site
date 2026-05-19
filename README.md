@@ -3,9 +3,8 @@
 A feature-rich, full-stack blog application built with the **MERN** stack (MongoDB, Express.js, React, Node.js). The application includes a robust Role-Based Access Control (RBAC) system for Admins, Authors, and Users.
 
 ## 🔗 Live Links
-- **Frontend App (Vercel):** [Insert Vercel Link Here]
-- **Backend API (Render):** [Insert Render Link Here]
-
+- **Frontend App (Vercel):** https://blog-site-ten-pi.vercel.app/
+- **Backend API (Render):** https://blog-site-kbfu.onrender.com
 ## 🚀 Features
 
 - **Role-Based Access Control (RBAC):**

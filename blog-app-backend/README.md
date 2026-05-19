@@ -103,4 +103,4 @@ The server will start on `http://localhost:5000`.
 ```
 
 ## 🔗 Live API Link (Render)
-- **Backend API:** [Insert Render Link Here]
+- **Backend API:** https://blog-site-kbfu.onrender.com

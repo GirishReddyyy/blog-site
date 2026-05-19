@@ -37,6 +37,12 @@ This is the frontend user interface for the full-stack MERN blog application. It
 - `globals` (^16.5.0)
 - `vite` (^7.3.1)
 
+**Installation Commands:**
+```bash
+npm install @tailwindcss/vite axios react react-dom react-hook-form react-hot-toast react-router tailwindcss zustand
+npm install -D @eslint/js @types/react @types/react-dom @vitejs/plugin-react eslint eslint-plugin-react-hooks eslint-plugin-react-refresh globals vite
+```
+
 ## 📁 Directory Structure
 ```text
 frontend/

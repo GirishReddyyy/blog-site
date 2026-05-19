@@ -28,6 +28,11 @@ This is the backend service for the full-stack MERN blog application. It provide
 - `multer` (^2.1.1)
 - `nodemon` (^3.1.14)
 
+**Installation Command:**
+```bash
+npm install bcrypt cloudinary cookie-parser cors dotenv express jsonwebtoken mongoose multer nodemon
+```
+
 ## 📁 Directory Structure
 ```text
 blog-app-backend/

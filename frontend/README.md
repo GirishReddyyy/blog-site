@@ -11,6 +11,31 @@ This is the frontend user interface for the full-stack MERN blog application. It
 - **React Hook Form**: Performant, flexible, and extensible forms with easy-to-use validation.
 - **React Hot Toast**: For elegant and customizable notifications.
 - **Axios**: Promise-based HTTP client for the browser.
+- **ESLint & Globals**: Linter for identifying and reporting on patterns in JavaScript.
+
+## 📦 Installed Packages
+
+**Dependencies:**
+- `@tailwindcss/vite` (^4.2.1)
+- `axios` (^1.13.6)
+- `react` (^19.2.0)
+- `react-dom` (^19.2.0)
+- `react-hook-form` (^7.71.2)
+- `react-hot-toast` (^2.6.0)
+- `react-router` (^7.13.1)
+- `tailwindcss` (^4.2.1)
+- `zustand` (^5.0.11)
+
+**DevDependencies:**
+- `@eslint/js` (^9.39.1)
+- `@types/react` (^19.2.7)
+- `@types/react-dom` (^19.2.3)
+- `@vitejs/plugin-react` (^5.1.1)
+- `eslint` (^9.39.1)
+- `eslint-plugin-react-hooks` (^7.0.1)
+- `eslint-plugin-react-refresh` (^0.4.24)
+- `globals` (^16.5.0)
+- `vite` (^7.3.1)
 
 ## 📁 Directory Structure
 ```text

@@ -11,6 +11,22 @@ This is the backend service for the full-stack MERN blog application. It provide
 - **Cloudinary**: Cloud storage service for handling user profile image uploads.
 - **Multer**: Middleware for handling `multipart/form-data` (image uploads).
 - **Cookie-Parser & CORS**: Middleware for managing cookies and Cross-Origin Resource Sharing.
+- **Dotenv**: Loading environment variables.
+- **Nodemon**: Automatic server restarts during development.
+
+## 📦 Installed Packages
+
+**Dependencies:**
+- `bcrypt` (^6.0.0)
+- `cloudinary` (^2.9.0)
+- `cookie-parser` (^1.4.7)
+- `cors` (^2.8.6)
+- `dotenv` (^17.2.3)
+- `express` (^5.2.1)
+- `jsonwebtoken` (^9.0.3)
+- `mongoose` (^9.1.5)
+- `multer` (^2.1.1)
+- `nodemon` (^3.1.14)
 
 ## 📁 Directory Structure
 ```text

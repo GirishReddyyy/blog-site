@@ -65,3 +65,42 @@ npm start
 ```
 The server will start on `http://localhost:5000`. 
 *Note: A default Admin account (`admin1@mail.com` / `123456`) is created automatically upon the first successful database connection.*
+
+## ⌨️ Commands
+- **Install dependencies:** `npm install`
+- **Start the development server:** `npm start`
+
+## 🗄️ Database Schemas
+
+### User Schema (`blog-users`)
+```javascript
+{
+    firstName: { type: String, required: true },
+    lastName: { type: String },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true, minlength: 6 },
+    profileImageUrl: { type: String },
+    role: { type: String, enum: ["AUTHOR", "USER", "ADMIN"], required: true },
+    isActive: { type: Boolean, default: true }
+}
+// Timestamps: true
+```
+
+### Article Schema (`blog-articles`)
+```javascript
+{
+    author: { type: Schema.Types.ObjectId, ref: "user", required: true },
+    title: { type: String, required: true },
+    category: { type: String, required: true },
+    content: { type: String, required: true },
+    comments: [{
+        user: { type: Schema.Types.ObjectId, ref: "user" },
+        comment: { type: String }
+    }],
+    isArticleActive: { type: Boolean, default: true }
+}
+// Timestamps: true
+```
+
+## 🔗 Live API Link (Render)
+- **Backend API:** [Insert Render Link Here]

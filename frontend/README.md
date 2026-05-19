@@ -60,9 +60,18 @@ Make sure you are in the `frontend` directory, then run:
 npm install
 ```
 
+*If you want to install the main packages manually, you can use these commands:*
+```bash
+npm install axios react react-dom react-hook-form react-hot-toast react-router zustand @tailwindcss/vite tailwindcss
+npm install -D globals eslint @eslint/js vite
+```
+
 ### 2. Start the Development Server
 ```bash
 npm run dev
 ```
 The frontend application will start and is typically accessible at `http://localhost:5173`. 
 Ensure that the backend server is also running concurrently so the frontend can successfully communicate with the APIs.
+
+## 🔗 Live Application Link (Vercel)
+- **Frontend App:** [Insert Vercel Link Here]
